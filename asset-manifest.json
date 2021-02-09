@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.4bf5cfa7.chunk.css",
-    "main.js": "/static/js/main.cbc1afce.chunk.js",
-    "main.js.map": "/static/js/main.cbc1afce.chunk.js.map",
+    "main.js": "/static/js/main.fbb1607d.chunk.js",
+    "main.js.map": "/static/js/main.fbb1607d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.bb5f28a1.js",
     "runtime-main.js.map": "/static/js/runtime-main.bb5f28a1.js.map",
-    "static/js/2.b727a411.chunk.js": "/static/js/2.b727a411.chunk.js",
-    "static/js/2.b727a411.chunk.js.map": "/static/js/2.b727a411.chunk.js.map",
+    "static/js/2.9756f7e5.chunk.js": "/static/js/2.9756f7e5.chunk.js",
+    "static/js/2.9756f7e5.chunk.js.map": "/static/js/2.9756f7e5.chunk.js.map",
     "static/js/3.c1b3bcb2.chunk.js": "/static/js/3.c1b3bcb2.chunk.js",
     "static/js/3.c1b3bcb2.chunk.js.map": "/static/js/3.c1b3bcb2.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.4bf5cfa7.chunk.css.map": "/static/css/main.4bf5cfa7.chunk.css.map",
-    "static/js/2.b727a411.chunk.js.LICENSE.txt": "/static/js/2.b727a411.chunk.js.LICENSE.txt",
+    "static/js/2.9756f7e5.chunk.js.LICENSE.txt": "/static/js/2.9756f7e5.chunk.js.LICENSE.txt",
     "static/media/Frane.9dcf968f.png": "/static/media/Frane.9dcf968f.png",
     "static/media/Prologue.css": "/static/media/Marker.c7b4b050.svg",
     "static/media/News Catalonia.01e2ccbb.mp4": "/static/media/News Catalonia.01e2ccbb.mp4",
@@ -28,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.bb5f28a1.js",
-    "static/js/2.b727a411.chunk.js",
+    "static/js/2.9756f7e5.chunk.js",
     "static/css/main.4bf5cfa7.chunk.css",
-    "static/js/main.cbc1afce.chunk.js"
+    "static/js/main.fbb1607d.chunk.js"
   ]
 }
