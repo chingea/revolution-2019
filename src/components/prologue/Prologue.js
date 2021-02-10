@@ -64,12 +64,14 @@ class Prologue extends React.Component {
   }
   componentDidMount() {
     window.addEventListener('load', this.handleLoad);
+    console.log('Component did mount');
   }
   componentWillUnmount() {
    window.removeEventListener('load', this.handleLoad);
   }
   handleLoad() {
     alert('Prologue has loaded');
+    console.log('handle has loaded');
   }
   render() {
     return (
