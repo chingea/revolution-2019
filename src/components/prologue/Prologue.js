@@ -55,23 +55,11 @@ class Prologue extends React.Component {
       scene: 0
     }
     this.setScene = this.setScene.bind(this);
-    this.handleLoad = this.handleLoad.bind(this);
   }
   setScene(i) {
     this.setState({
       scene: i
     })
-  }
-  componentDidMount() {
-    window.addEventListener('load', this.handleLoad);
-    console.log('Component did mount');
-  }
-  componentWillUnmount() {
-   window.removeEventListener('load', this.handleLoad);
-  }
-  handleLoad() {
-    alert('Prologue has loaded');
-    console.log('handle has loaded');
   }
   render() {
     return (

@@ -32,6 +32,18 @@ h6 {
   margin: 10px;
 }
 
+.button-disabled {
+  z-index: 1;
+  background: black;
+  cursor: no-drop;
+  font-size: 30px;
+  border: 2px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 15px 100px;
+  margin: 10px;
+}
+
 .button:hover {
   border: 2px solid yellow;
   color: yellow;

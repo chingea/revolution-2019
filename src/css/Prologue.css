@@ -88,19 +88,48 @@
 }
 
 .marker {
-  background-image: url(../media/prologue/Marker.svg);
   background-size: cover;
   width: 20px;
   height: 15px;
   cursor: pointer;
-  opacity: 0.3;
+  transition: background-image .2s ease-in-out, opacity .2s;
+  opacity: 0.5;
 }
 
 .marker:hover {
   opacity: 1;
 }
 
-.active-marker {
+.marker-active {
+  opacity: 1;
+}
+
+.marker-yellow {
+  background-image: url(../media/prologue/marker-yellow.svg);
+}
+
+.marker-0 {
+  background-image: url(../media/prologue/marker-cyan.svg);
+  opacity: 1;
+}
+
+.marker-1 {
+  background-image: url(../media/prologue/marker-chartreuse.svg);
+  opacity: 1;
+}
+
+.marker-2 {
+  background-image: url(../media/prologue/marker-magenta.svg);
+  opacity: 1;
+}
+
+.marker-3 {
+  background-image: url(../media/prologue/marker-red.svg);
+  opacity: 1;
+}
+
+.marker-4 {
+  background-image: url(../media/prologue/marker-blue.svg);
   opacity: 1;
 }
 

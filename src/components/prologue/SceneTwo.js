@@ -3,9 +3,8 @@ import mapboxgl from "mapbox-gl";
 import $ from "jquery";
 import frane from "../../media/prologue/Frane.png";
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
-console.log('access token: '+process.env.REACT_APP_MAPBOX_KEY);
-// pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
+mapboxgl.accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
 const filters = ["Authoritarianism", "Corruption", "Police brutality", "Government inefficiency", "Economic inequalities"];
 
 const protests = [{
@@ -135,13 +134,6 @@ const protests = [{
   outcomes: "The government agreed to rewrite the bill in response to protest demands.",
   tags: "tag-2"
 }, {
-  location: "Nepal",
-  position: [85.324, 27.717],
-  triggers: "Prime Minister Khadga Prasad Sharma Oli’s move to dissolve parliament and call early elections.",
-  motivations: "Frustration over increasing partisanship; concerns over the constitutionality of the dissolution of parliament; and the breakdown of a power-sharing agreement between the prime minister and members of the ruling Nepal Communist Party.",
-  outcomes: "There was no change in policy or leadership in response to the protests.",
-  tags: "tag-0"
-}, {
   location: "Bolivia",
   position: [-68.119, -16.490],
   triggers: "Claims of electoral fraud in the 2019 general elections.",
@@ -225,8 +217,8 @@ class Map extends React.Component {
     });
     // map.addControl(new mapboxgl.AttributionControl({compact: true}), "top-left");
     protests.forEach((protest) => {
-      var el = document.createElement("div");
-      el.className = "marker "+protest.tags;
+      const el = document.createElement("div");
+      el.className = "marker marker-yellow "+protest.tags;
       var popup = new mapboxgl.Popup({
         offset: 10,
         focusAfterOpen: false,
@@ -241,6 +233,12 @@ class Map extends React.Component {
         "<p><strong>Motivations:</strong> "+protest.motivations+"</p>"+
         "<p><strong>Outcomes:</strong> "+protest.outcomes+"</p></div>"
       );
+      popup.on('open', function(){
+        el.classList.add("marker-active");
+      });
+      popup.on('close', function(){
+        el.classList.remove("marker-active");
+      });
       new mapboxgl.Marker(el).setLngLat(protest.position).setPopup(popup).addTo(map);
     });
 }
@@ -258,10 +256,12 @@ class Filters extends React.Component {
     super(props)
   }
   handleMouseEnter(i) {
-    $(".tag-"+i).addClass("active-marker");
+    $(".tag-"+i).removeClass("marker-yellow");
+    $(".tag-"+i).addClass("marker-"+i);
   }
   handleMouseLeave(i) {
-    $(".tag-"+i).removeClass("active-marker");
+    $(".tag-"+i).removeClass("marker-"+i);
+    $(".tag-"+i).addClass("marker-yellow");
   }
   renderFilter(i) {
     return (
