@@ -5,6 +5,10 @@ import SceneZero from "./SceneZero";
 import SceneOne from "./SceneOne";
 import SceneTwo from "./SceneTwo";
 
+window.addEventListener('load', (event) => {
+  alert('loaded!');
+});
+
 class Controls extends React.Component {
   constructor(props) {
     super(props);
