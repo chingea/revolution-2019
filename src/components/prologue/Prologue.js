@@ -5,10 +5,6 @@ import SceneZero from "./SceneZero";
 import SceneOne from "./SceneOne";
 import SceneTwo from "./SceneTwo";
 
-window.addEventListener('load', (event) => {
-  alert('loaded!');
-});
-
 class Controls extends React.Component {
   constructor(props) {
     super(props);
@@ -59,11 +55,21 @@ class Prologue extends React.Component {
       scene: 0
     }
     this.setScene = this.setScene.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
   }
   setScene(i) {
     this.setState({
       scene: i
     })
+  }
+  componentDidMount() {
+    window.addEventListener('load', this.handleLoad);
+  }
+  componentWillUnmount() {
+   window.removeEventListener('load', this.handleLoad);
+  }
+  handleLoad() {
+    alert('Prologue has loaded');
   }
   render() {
     return (
