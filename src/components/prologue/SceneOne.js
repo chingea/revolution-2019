@@ -10,7 +10,21 @@ import lebanon from "../../media/prologue/News Lebanon.mp4";
 import sudan from "../../media/prologue/News Sudan.mp4";
 import usa from "../../media/prologue/News USA.mp4";
 
-const channels = [catalonia, chile, colombia, haiti, hongkong, iraq, lebanon, sudan, usa];
+const channels = [catalonia, sudan, colombia, haiti, hongkong, iraq, lebanon, chile, usa];
+
+class CaptionsButton extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  handleClick() {
+    alert("Captions coming soon.")
+  }
+  render() {
+    return (
+      <div className="captions-button" onClick={this.handleClick}><i class="far fa-closed-captioning"></i></div>
+    );
+  }
+}
 
 class PlayButton extends React.Component {
   constructor(props) {
@@ -18,7 +32,9 @@ class PlayButton extends React.Component {
   }
   render() {
     return (
-      <a className={this.props.playing ? "display-none" : "button play-button"} onClick={this.props.handleClick}>{this.props.firstTime ? "Play" : "Replay"}</a>
+      <a
+      className={this.props.playing ? "display-none" : this.props.canPlay ? "button play-button" : "button-disabled play-button"}
+      onClick={this.props.handleClick}>{this.props.canPlay ? this.props.firstTime ? "Play" : "Replay" : "Loading"}</a>
     );
   }
 }
@@ -30,6 +46,7 @@ class Channel extends React.Component {
   render() {
     return (
       <video
+      onCanPlayThrough={() => this.props.onCanPlayThrough(this.props.index)}
       className={"grid-video".concat(this.props.isActive ? " active" : "")}
       onMouseEnter={() => this.props.handleMouseEnter(this.props.index)}
       onMouseLeave={this.props.handleMouseLeave}
@@ -108,6 +125,7 @@ class Grid extends React.Component {
   renderChannel(i) {
     return (
       <Channel
+      onCanPlayThrough={this.props.onCanPlayThrough}
       index={i}
       channel={channels[i]}
       isActive={this.state.activeIndex == i}
@@ -140,18 +158,23 @@ class SceneOne extends React.Component {
     super(props);
     this.state = {
       playing: false,
-      firstTime: true
+      firstTime: true,
+      canBePlayed: [false, false, false, false, false, false, false, false, false],
+      canPlay: false
     };
     this.play = this.play.bind(this);
     this.handleEnded = this.handleEnded.bind(this);
+    this.handleCanPlayThrough = this.handleCanPlayThrough.bind(this);
   }
   play() {
-    $("video").each((i, vid) => {
-      vid.play();
-    });
-    this.setState({
-      playing: true
-    });
+    if (this.state.canPlay) {
+      $("video").each((i, vid) => {
+        vid.play();
+      });
+      this.setState({
+        playing: true
+      });
+    }
   }
   handleEnded() {
     this.setState({
@@ -159,14 +182,28 @@ class SceneOne extends React.Component {
       firstTime: false
     });
   }
+  handleCanPlayThrough(index) {
+    var canBePlayed = this.state.canBePlayed;
+    var trueArray = new Array(9).fill(true);
+    canBePlayed[index] = true;
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    let canPlay = countOccurrences(canBePlayed, true) === 9;
+    this.setState({
+      canBePlayed: canBePlayed,
+      canPlay: canPlay
+    });
+  }
   render() {
     return (
       <div>
+        <CaptionsButton />
         <PlayButton
         handleClick={this.play}
         playing={this.state.playing}
-        firstTime={this.state.firstTime}/>
+        firstTime={this.state.firstTime}
+        canPlay={this.state.canPlay}/>
         <Grid
+        onCanPlayThrough={this.handleCanPlayThrough}
         playing={this.state.playing}
         handleEnded={this.handleEnded}/>
       </div>

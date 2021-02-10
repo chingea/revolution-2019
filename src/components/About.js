@@ -2,7 +2,7 @@ import React from "react";
 
 class About extends React.Component {
   render() {
-    return <h2>Hi, I am a abouttttt!</h2>;
+    return <h2>Coming soon</h2>;
   }
 }
 export default About;

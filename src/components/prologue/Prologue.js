@@ -18,6 +18,14 @@ class Controls extends React.Component {
         </div>
       )
     }
+    else if (this.props.scene == 2) {
+      return (
+        <div className="controls">
+          <a className="control-link" onClick={() => this.props.setScene(1)}>&lt; Back</a>
+          <Link className="control-link" to="/">Next &gt;</Link>
+        </div>
+      );
+    }
     else {
       return (
         <div className="controls">
