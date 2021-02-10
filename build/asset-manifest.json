@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4bf5cfa7.chunk.css",
+    "main.js": "/static/js/main.916420a5.chunk.js",
+    "main.js.map": "/static/js/main.916420a5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bb5f28a1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bb5f28a1.js.map",
+    "static/js/2.b727a411.chunk.js": "/static/js/2.b727a411.chunk.js",
+    "static/js/2.b727a411.chunk.js.map": "/static/js/2.b727a411.chunk.js.map",
+    "static/js/3.c1b3bcb2.chunk.js": "/static/js/3.c1b3bcb2.chunk.js",
+    "static/js/3.c1b3bcb2.chunk.js.map": "/static/js/3.c1b3bcb2.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.4bf5cfa7.chunk.css.map": "/static/css/main.4bf5cfa7.chunk.css.map",
+    "static/js/2.b727a411.chunk.js.LICENSE.txt": "/static/js/2.b727a411.chunk.js.LICENSE.txt",
+    "static/media/Frane.9dcf968f.png": "/static/media/Frane.9dcf968f.png",
+    "static/media/Prologue.css": "/static/media/Marker.c7b4b050.svg",
+    "static/media/News Catalonia.01e2ccbb.mp4": "/static/media/News Catalonia.01e2ccbb.mp4",
+    "static/media/News Chile.6f36a9b6.mp4": "/static/media/News Chile.6f36a9b6.mp4",
+    "static/media/News Colombia.9befaeeb.mp4": "/static/media/News Colombia.9befaeeb.mp4",
+    "static/media/News Haiti.0be115cf.mp4": "/static/media/News Haiti.0be115cf.mp4",
+    "static/media/News Hong Kong.f4fa13d2.mp4": "/static/media/News Hong Kong.f4fa13d2.mp4",
+    "static/media/News Iraq.784155ff.mp4": "/static/media/News Iraq.784155ff.mp4",
+    "static/media/News Lebanon.a389790f.mp4": "/static/media/News Lebanon.a389790f.mp4",
+    "static/media/News Sudan.b0df1b6c.mp4": "/static/media/News Sudan.b0df1b6c.mp4",
+    "static/media/News USA.686df143.mp4": "/static/media/News USA.686df143.mp4",
+    "static/media/Prologue.218ac3ed.mp4": "/static/media/Prologue.218ac3ed.mp4",
+    "static/media/logo.6ce24c58.svg": "/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb5f28a1.js",
+    "static/js/2.b727a411.chunk.js",
+    "static/css/main.4bf5cfa7.chunk.css",
+    "static/js/main.916420a5.chunk.js"
+  ]
+}

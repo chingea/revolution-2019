@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px;
+}
+
+h6 {
+  font-size: 30px;
+  margin: 0px;
+  font-weight: 200;
+}
+
+.button {
+  z-index: 1;
+  background: black;
+  cursor: pointer;
+  font-size: 30px;
+  border: 2px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 15px 100px;
+  margin: 10px;
+}
+
+.button:hover {
+  border: 2px solid yellow;
+  color: yellow;
+}
