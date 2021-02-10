@@ -4,7 +4,7 @@ import $ from "jquery";
 import frane from "../../media/prologue/Frane.png";
 
 mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
-
+console.log('access token: '+process.env.MAPBOX_TOKEN);
 // pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ
 const filters = ["Authoritarianism", "Corruption", "Police brutality", "Government inefficiency", "Economic inequalities"];
 
