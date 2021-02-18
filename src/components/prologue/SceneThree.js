@@ -14,6 +14,11 @@ import an from "../../media/prologue/logo-annahar.png";
 import vox from "../../media/prologue/logo-vox.png";
 import gu from "../../media/prologue/logo-guardian.png";
 
+const accessToken = process.env.REACT_APP_MAPBOX_KEY;
+// const accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
+
+
+
 const articles = [{
   title: "Digital media fuel global protests but can be used against them",
   source: "The Economist",
@@ -134,7 +139,7 @@ const articles = [{
 
 var config = {
     style: 'mapbox://styles/charlesingea/ckkwgll2a4zb417n42kaelwja',
-    accessToken: 'pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpuc3lxcTBpcjc0M290YjRxbnJ1ZngifQ.wGSPWvAan_QiZsy2L4uoyg',
+    accessToken: accessToken,
     showMarkers: true,
     theme: 'light',
     chapters: [
