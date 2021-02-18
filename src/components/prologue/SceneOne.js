@@ -1,5 +1,7 @@
 import React from "react";
 import $ from "jquery";
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 import catalonia from "../../media/prologue/News Catalonia.mp4";
 import chile from "../../media/prologue/News Chile.mp4";
 import colombia from "../../media/prologue/News Colombia.mp4";
@@ -9,19 +11,41 @@ import iraq from "../../media/prologue/News Iraq.mp4";
 import lebanon from "../../media/prologue/News Lebanon.mp4";
 import sudan from "../../media/prologue/News Sudan.mp4";
 import usa from "../../media/prologue/News USA.mp4";
+import emptyAudio from "../../media/prologue/empty-audio.mp3";
+import captionsCatalonia from "../../media/prologue/catalonia.vtt";
+import captionsSudan from "../../media/prologue/sudan.vtt";
+import captionsColombia from "../../media/prologue/colombia.vtt";
+import captionsHaiti from "../../media/prologue/haiti.vtt";
+import captionsHongKong from "../../media/prologue/hongkong.vtt";
+import captionsIraq from "../../media/prologue/iraq.vtt";
+import captionsLebanon from "../../media/prologue/lebanon.vtt";
+import captionsChile from "../../media/prologue/chile.vtt";
+import captionsUSA from "../../media/prologue/usa.vtt";
 
 const channels = [catalonia, sudan, colombia, haiti, hongkong, iraq, lebanon, chile, usa];
+
+const countries = ["Catalonia", "Sudan", "Colombia", "Haiti", "Hong Kong", "Iraq", "Lebanon", "Chile", "USA"]
+
+const captions = [captionsCatalonia, captionsSudan, captionsColombia, captionsHaiti, captionsHongKong, captionsIraq, captionsLebanon, captionsChile, captionsUSA];
 
 class CaptionsButton extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleClick() {
-    alert("Captions coming soon.")
+  componentDidMount() {
+    tippy('#captions-button', {
+        content: 'Toggle subtitles',
+      });
   }
   render() {
     return (
-      <div className="captions-button" onClick={this.handleClick}><i class="far fa-closed-captioning"></i></div>
+      <div>
+        <div
+        id="captions-button"
+        className={this.props.captionsOn ? "captions-button captions-active" : "captions-button"}
+        onClick={this.props.toggleCaptions}><i className="far fa-closed-captioning"></i></div>
+      </div>
+
     );
   }
 }
@@ -61,16 +85,96 @@ class Channel extends React.Component {
 class Grid extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeIndex: null
-    }
     this.renderChannel = this.renderChannel.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.props.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.props.handleKeyPress);
+  }
+
+  renderChannel(i) {
+    return (
+      <Channel
+      onCanPlayThrough={this.props.onCanPlayThrough}
+      index={i}
+      channel={channels[i]}
+      isActive={this.props.activeIndex == i}
+      handleMouseEnter={this.props.handleMouseEnter}
+      handleMouseLeave={this.props.handleMouseLeave}
+      handleEnded={this.props.handleEnded}/>
+    );
+  }
+  render() {
+    return (
+      <div className="grid">
+        <div className="grid-header">Move cursor or use keyboard arrows to change channels.</div>
+        <div className="country-name">{countries[this.props.activeIndex]}</div>
+        {this.renderChannel(0)}
+        {this.renderChannel(1)}
+        {this.renderChannel(2)}
+        {this.renderChannel(3)}
+        {this.renderChannel(4)}
+        {this.renderChannel(5)}
+        {this.renderChannel(6)}
+        {this.renderChannel(7)}
+        {this.renderChannel(8)}
+      </div>
+    );
+  }
+}
+
+class Captions extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    $('audio')[0].textTracks[0].oncuechange = function() {
+      if (this.activeCues[0]) {
+        $("#captions").html(this.activeCues[0].text);
+      } else {
+        $("#captions").html("");
+      }
+    }
+  }
+  render() {
+    return (
+      <div>
+        <audio src={emptyAudio}>
+          <track src={captions[this.props.activeIndex]} kind="subtitles" srcLang="en" default />
+        </audio>
+        <div
+        id="captions"
+        className={this.props.captionsOn ? this.props.activeIndex != null ? "captions" : "display-none" : "display-none"}></div>
+      </div>
+
+    );
+  }
+}
+
+class SceneOne extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      playing: false,
+      firstTime: true,
+      canBePlayed: [false, false, false, false, false, false, false, false, false],
+      canPlay: false,
+      activeIndex: null,
+      captionsOn: true
+    };
+    this.play = this.play.bind(this);
+    this.handleEnded = this.handleEnded.bind(this);
+    this.handleCanPlayThrough = this.handleCanPlayThrough.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyPress= this.handleKeyPress.bind(this);
+    this.toggleCaptions = this.toggleCaptions.bind(this);
   }
   handleMouseEnter(index) {
-    if (this.props.playing) {
+    if (this.state.playing) {
       this.setState({
         activeIndex: index
       });
@@ -80,12 +184,6 @@ class Grid extends React.Component {
     this.setState({
       activeIndex: null
     });
-  }
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyPress);
-  }
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyPress);
   }
   handleKeyPress(e) {
     switch (e.keyCode) {
@@ -122,55 +220,12 @@ class Grid extends React.Component {
           }
           e.preventDefault();
   }
-  renderChannel(i) {
-    return (
-      <Channel
-      onCanPlayThrough={this.props.onCanPlayThrough}
-      index={i}
-      channel={channels[i]}
-      isActive={this.state.activeIndex == i}
-      handleMouseEnter={this.handleMouseEnter}
-      handleMouseLeave={this.handleMouseLeave}
-      handleEnded={this.props.handleEnded}/>
-    );
-  }
-  render() {
-    return (
-      <div className="grid">
-        <div className="grid-header">Move cursor or use keyboard arrows to change channels.</div>
-        {this.renderChannel(0)}
-        {this.renderChannel(1)}
-        {this.renderChannel(2)}
-        {this.renderChannel(3)}
-        {this.renderChannel(4)}
-        {this.renderChannel(5)}
-        {this.renderChannel(6)}
-        {this.renderChannel(7)}
-        {this.renderChannel(8)}
-      </div>
-
-    );
-  }
-}
-
-class SceneOne extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playing: false,
-      firstTime: true,
-      canBePlayed: [false, false, false, false, false, false, false, false, false],
-      canPlay: false
-    };
-    this.play = this.play.bind(this);
-    this.handleEnded = this.handleEnded.bind(this);
-    this.handleCanPlayThrough = this.handleCanPlayThrough.bind(this);
-  }
   play() {
     if (this.state.canPlay) {
       $("video").each((i, vid) => {
         vid.play();
       });
+      $("audio")[0].play();
       this.setState({
         playing: true
       });
@@ -193,19 +248,34 @@ class SceneOne extends React.Component {
       canPlay: canPlay
     });
   }
+  toggleCaptions() {
+    var captions = this.state.captionsOn;
+    this.setState({
+      captionsOn: !captions
+    });
+  }
   render() {
     return (
       <div>
-        <CaptionsButton />
+        <CaptionsButton
+        captionsOn={this.state.captionsOn}
+        toggleCaptions={this.toggleCaptions} />
         <PlayButton
         handleClick={this.play}
         playing={this.state.playing}
         firstTime={this.state.firstTime}
         canPlay={this.state.canPlay}/>
         <Grid
+        handleMouseEnter={this.handleMouseEnter}
+        handleMouseLeave={this.handleMouseLeave}
+        handleKeyPress={this.handleKeyPress}
+        activeIndex={this.state.activeIndex}
         onCanPlayThrough={this.handleCanPlayThrough}
         playing={this.state.playing}
         handleEnded={this.handleEnded}/>
+        <Captions
+        activeIndex={this.state.activeIndex}
+        captionsOn={this.state.captionsOn} />
       </div>
     );
   }

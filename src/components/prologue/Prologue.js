@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import SceneZero from "./SceneZero";
 import SceneOne from "./SceneOne";
 import SceneTwo from "./SceneTwo";
+import SceneThree from "./SceneThree";
 
 class Controls extends React.Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class Controls extends React.Component {
         </div>
       )
     }
-    else if (this.props.scene == 2) {
+    else if (this.props.scene == 3) {
       return (
         <div className="controls">
-          <a className="control-link" onClick={() => this.props.setScene(1)}>&lt; Back</a>
+          <a className="control-link" onClick={() => this.props.setScene(2)}>&lt; Back</a>
           <Link className="control-link" to="/">Next &gt;</Link>
         </div>
       );
@@ -50,6 +51,8 @@ class Scene extends React.Component {
         return (<SceneOne />);
       case 2:
         return (<SceneTwo />);
+      case 3:
+        return (<SceneThree />);
       default:
         return (<SceneZero />);
     }
