@@ -23,7 +23,7 @@ class Controls extends React.Component {
       return (
         <div className="controls">
           <a className="control-link" onClick={() => this.props.setScene(2)}>&lt; Back</a>
-          <Link className="control-link" to="/">Next &gt;</Link>
+          <Link className="control-link" to="/chapter-selection">Next &gt;</Link>
         </div>
       );
     }

@@ -55,8 +55,8 @@ import soundVenezuela from "../../media/prologue/Sound-Venezuela.mp3";
 
 const markers = [cyanMarker, chartreuseMarker, magentaMarker, redMarker, blueMarker]
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
-// mapboxgl.accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
+// mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
+mapboxgl.accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
 const filters = ["Authoritarianism", "Corruption", "Police brutality", "Government inefficiency", "Economic inequalities"];
 
 const protests = [{

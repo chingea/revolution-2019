@@ -48,3 +48,26 @@ h6 {
   border: 2px solid yellow;
   color: yellow;
 }
+
+.controls {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.control-link {
+  padding: 3px;
+  user-select: none;
+  color: white;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.control-link:hover {
+  color: yellow;
+}

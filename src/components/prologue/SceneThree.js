@@ -14,8 +14,8 @@ import an from "../../media/prologue/logo-annahar.png";
 import vox from "../../media/prologue/logo-vox.png";
 import gu from "../../media/prologue/logo-guardian.png";
 
-const accessToken = process.env.REACT_APP_MAPBOX_KEY;
-// const accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
+// const accessToken = process.env.REACT_APP_MAPBOX_KEY;
+const accessToken = "pk.eyJ1IjoiY2hhcmxlc2luZ2VhIiwiYSI6ImNqcWpudGdsMDBwdmY0OXBvanQyaHN0MnoifQ._0O-n_18aXTVaue93HD6PQ"
 
 
 
@@ -432,10 +432,10 @@ class Map extends React.Component {
 
     if (config.showMarkers) {
       var tweetContainer = document.createElement("div");
-      var tweet = <Tweet tweetId={config.chapters[0].tweetId} options={{ theme: "dark" }} />;
+      var tweet = <Tweet tweetId={config.chapters[0].tweetId} options={{ theme: "dark", width: "300", align: "center"}} />;
       ReactDOM.render(tweet, tweetContainer);
       var popup = new mapboxgl.Popup({
-        offset: [0, -350],
+        offset: [0, -250],
         focusAfterOpen: false,
         closeButton: false,
         closeOnClick: false
@@ -484,7 +484,7 @@ class Map extends React.Component {
             map[chapter.mapAnimation || 'flyTo'](chapter.location);
 
             if (config.showMarkers) {
-                var tweet = <Tweet tweetId={chapter.tweetId} options={{ theme: "dark" }} />;
+                var tweet = <Tweet tweetId={chapter.tweetId} options={{ theme: "dark", width: "300", align: "center"}} />;
                 ReactDOM.render(tweet, tweetContainer);
                 popup.setDOMContent(tweetContainer);
                 popup.setLngLat(chapter.location.center);

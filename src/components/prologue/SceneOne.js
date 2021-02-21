@@ -69,15 +69,17 @@ class Channel extends React.Component {
   }
   render() {
     return (
-      <video
-      onCanPlayThrough={() => this.props.onCanPlayThrough(this.props.index)}
-      className={"grid-video".concat(this.props.isActive ? " active" : "")}
-      onMouseEnter={() => this.props.handleMouseEnter(this.props.index)}
-      onMouseLeave={this.props.handleMouseLeave}
-      onEnded={this.props.handleEnded}
-      muted={this.props.isActive ? false : "muted"}>
-        <source src={this.props.channel} type="video/mp4"/>
-      </video>
+
+        <video
+        onCanPlayThrough={() => this.props.onCanPlayThrough(this.props.index)}
+        className={"grid-video".concat(this.props.isActive ? " active" : "")}
+        onMouseEnter={() => this.props.handleMouseEnter(this.props.index)}
+        onMouseLeave={this.props.handleMouseLeave}
+        onEnded={this.props.handleEnded}
+        muted={this.props.isActive ? false : "muted"}>
+          <source src={this.props.channel} type="video/mp4"/>
+        </video>
+
     );
   }
 }
@@ -109,18 +111,22 @@ class Grid extends React.Component {
   }
   render() {
     return (
-      <div className="grid">
+      <div>
         <div className="grid-header">Move cursor or use keyboard arrows to change channels.</div>
         <div className="country-name">{countries[this.props.activeIndex]}</div>
-        {this.renderChannel(0)}
-        {this.renderChannel(1)}
-        {this.renderChannel(2)}
-        {this.renderChannel(3)}
-        {this.renderChannel(4)}
-        {this.renderChannel(5)}
-        {this.renderChannel(6)}
-        {this.renderChannel(7)}
-        {this.renderChannel(8)}
+        <div className="grid-container">
+          <div className="grid">
+            {this.renderChannel(0)}
+            {this.renderChannel(1)}
+            {this.renderChannel(2)}
+            {this.renderChannel(3)}
+            {this.renderChannel(4)}
+            {this.renderChannel(5)}
+            {this.renderChannel(6)}
+            {this.renderChannel(7)}
+            {this.renderChannel(8)}
+          </div>
+        </div>
       </div>
     );
   }
