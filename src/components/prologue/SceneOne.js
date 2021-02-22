@@ -69,12 +69,13 @@ class Channel extends React.Component {
   }
   render() {
     return (
-
         <video
+        preload="auto"
         onCanPlayThrough={() => this.props.onCanPlayThrough(this.props.index)}
         className={"grid-video".concat(this.props.isActive ? " active" : "")}
         onMouseEnter={() => this.props.handleMouseEnter(this.props.index)}
         onMouseLeave={this.props.handleMouseLeave}
+        onProgress={(e) => this.props.onProgress(e, this.props.index)}
         onEnded={this.props.handleEnded}
         muted={this.props.isActive ? false : "muted"}>
           <source src={this.props.channel} type="video/mp4"/>
@@ -89,14 +90,12 @@ class Grid extends React.Component {
     super(props);
     this.renderChannel = this.renderChannel.bind(this);
   }
-
   componentDidMount() {
     document.addEventListener("keydown", this.props.handleKeyPress);
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", this.props.handleKeyPress);
   }
-
   renderChannel(i) {
     return (
       <Channel
@@ -106,7 +105,8 @@ class Grid extends React.Component {
       isActive={this.props.activeIndex == i}
       handleMouseEnter={this.props.handleMouseEnter}
       handleMouseLeave={this.props.handleMouseLeave}
-      handleEnded={this.props.handleEnded}/>
+      handleEnded={this.props.handleEnded}
+      onProgress={this.props.onProgress}/>
     );
   }
   render() {
@@ -169,7 +169,9 @@ class SceneOne extends React.Component {
       canBePlayed: [false, false, false, false, false, false, false, false, false],
       canPlay: false,
       activeIndex: null,
-      captionsOn: true
+      captionsOn: true,
+      percentageLoaded: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      totalLoaded: 0
     };
     this.play = this.play.bind(this);
     this.handleEnded = this.handleEnded.bind(this);
@@ -178,6 +180,7 @@ class SceneOne extends React.Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleKeyPress= this.handleKeyPress.bind(this);
     this.toggleCaptions = this.toggleCaptions.bind(this);
+    this.handleProgress = this.handleProgress.bind(this);
   }
   handleMouseEnter(index) {
     if (this.state.playing) {
@@ -254,6 +257,18 @@ class SceneOne extends React.Component {
       canPlay: canPlay
     });
   }
+  handleProgress(e, index) {
+    if (e.target.buffered.length > 0) {
+      var percentageLoaded = this.state.percentageLoaded;
+      percentageLoaded[index] = Math.round(e.target.buffered.end(0) / e.target.duration * 100.0);
+      var totalLoaded = Math.round(percentageLoaded.reduce((a, b) => a + b, 0) / 9.0);
+      this.setState({
+        percentageLoaded: percentageLoaded,
+        totalLoaded: totalLoaded
+      });
+      console.log(this.state.totalLoaded);
+    }
+  }
   toggleCaptions() {
     var captions = this.state.captionsOn;
     this.setState({
@@ -263,6 +278,9 @@ class SceneOne extends React.Component {
   render() {
     return (
       <div>
+        <div className="loading-bar-container">
+          <div className={this.state.canPlay ? "display-none" : "loading-bar"} style={{width: this.state.totalLoaded + "%"}}></div>
+        </div>
         <CaptionsButton
         captionsOn={this.state.captionsOn}
         toggleCaptions={this.toggleCaptions} />
@@ -277,6 +295,7 @@ class SceneOne extends React.Component {
         handleKeyPress={this.handleKeyPress}
         activeIndex={this.state.activeIndex}
         onCanPlayThrough={this.handleCanPlayThrough}
+        onProgress={this.handleProgress}
         playing={this.state.playing}
         handleEnded={this.handleEnded}/>
         <Captions
